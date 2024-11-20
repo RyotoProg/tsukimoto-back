@@ -15,8 +15,9 @@ var shopRoute = require('./routes/shopRoute')
 var configRoute = require('./routes/configRoute')
 
 var port = process.env.PORT || 4201
+var db = process.env.DB
 
-mongoose.connect('mongodb://127.0.0.1:27017/tsukimoto')
+mongoose.connect(`mongodb+srv://reyespalmanicolas:${db}@tsukimoto.m1ltn.mongodb.net/?retryWrites=true&w=majority&appName=tsukimoto`)
 .then((success)=>app.listen(port, ()=>{console.log('Server in ' + port)}))
 .catch((error)=>console.log(error))
 
