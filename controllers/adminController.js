@@ -58,6 +58,10 @@ const login = async function(req, res){
 const verifyToken = async function(req, res) {
     try {
         var token = req.params.token
+        
+        if(token === null) {
+            return res.status(404).send({ok: false})
+        }
 
         const verify = await jwt.verify(token, process.env.JWT_SECRET)
 
