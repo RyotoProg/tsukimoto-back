@@ -6,6 +6,22 @@ var path = require('path')
 
 var listNews = async function(req, res){
     try {
+        var data = await news.find({}).sort({date:-1})
+
+        if(!data){
+            return res.status(404).send({error: 'No se encuentran noticias o existe error en el servidor', ok: false})
+        }
+        
+        return res.status(200).send({data, ok: true})
+
+    } catch (error) {
+        console.log(error)
+        return res.status(500).send({error: 'Error en el servidor, porfavor contacte al soporte para resolver el inconveniente', ok: false})
+    }
+}
+
+var listNewsAdmin = async function(req, res){
+    try {
         var data = await news.find({})
 
         if(!data){
@@ -91,5 +107,6 @@ module.exports = {
     create,
     listNews,
     listNew,
-    deleteNew
+    deleteNew,
+    listNewsAdmin
 }
